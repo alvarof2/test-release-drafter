@@ -33,6 +33,8 @@ jobs:
             // Filter for draft releases
             const draftRelease = releases.data.filter(release => release.draft);
             console.debug(draftRelease);
+            console.debug(draftRelease.id);
+            const id = draftRelease.id;
 
             if (!draftRelease) {
               core.setFailed(`No draft release found for tag: ${tagName}`);
@@ -43,7 +45,7 @@ jobs:
             await github.rest.repos.updateRelease({
               owner,
               repo,
-              draftRelease.id,
+              id,
               draft: false, // Set draft to false to publish it,
               tag_name: tagName,
               name: `${repo} ${tagName}`
