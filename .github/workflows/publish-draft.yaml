@@ -28,11 +28,11 @@ jobs:
               repo,
             });
 
-            log.debug(releases);
+            console.debug(releases);
 
             // Filter for draft releases
             const draftRelease = releases.data.filter(release => release.draft);
-            log.debug(draftRelease);
+            console.debug(draftRelease);
 
             if (!draftRelease) {
               core.setFailed(`No draft release found for tag: ${tagName}`);
