@@ -28,20 +28,8 @@ jobs:
               repo,
             });
 
-            console.debug(releases)
-
             // Filter for draft releases
-            const draftReleases = releases.data.filter(release => release.draft);
-
-
-            if (draftReleases.length === 0) {
-              console.log('No draft releases found.');
-            } else {
-              console.log('Draft Releases:');
-              draftReleases.forEach(release => {
-                console.log(`- ID: ${release.id}, Tag: ${release.tag_name}, Name: ${release.name}`);
-              });
-            }
+            const draftRelease = releases.data.filter(release => release.draft);
 
             if (!draftRelease) {
               core.setFailed(`No draft release found for tag: ${tagName}`);
