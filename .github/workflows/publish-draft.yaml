@@ -45,7 +45,7 @@ jobs:
             await github.rest.repos.updateRelease({
               owner,
               repo,
-              id,
+              release_id: id,
               draft: false, // Set draft to false to publish it,
               tag_name: tagName,
               name: `${repo} ${tagName}`
