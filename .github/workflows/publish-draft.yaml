@@ -27,6 +27,8 @@ jobs:
               repo,
             });
 
+            console.log(`${releases}`);
+
             const draftRelease = releases.data.find(release => release.draft);
 
             console.log(`${draftRelease}`);
