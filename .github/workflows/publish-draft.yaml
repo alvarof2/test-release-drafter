@@ -4,6 +4,7 @@ on:
   push:
     tags:
       - '*' # Trigger on any tag
+  workflow_dispatch:
 
 jobs:
   publish-draft-release:
@@ -27,6 +28,8 @@ jobs:
             });
 
             const draftRelease = releases.data.find(release => release.draft);
+
+            console.log(`${draftRelease}`);
 
             if (!draftRelease) {
               core.setFailed(`No draft release found for tag: ${tagName}`);
