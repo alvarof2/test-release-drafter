@@ -13,9 +13,7 @@ jobs:
     steps:
       # Use the GitHub Script Action to find and publish the draft release
       - name: Publish Draft Release
-        uses: actions/github-script@v6
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/github-script@v7
         with:
           script: |
             const { owner, repo } = context.repo;
@@ -30,7 +28,8 @@ jobs:
             console.log(`${releases}`);
 
             // Filter for draft releases
-            const draftReleases = releases.find((r) => r.draft);
+            const draftReleases = releases.data.filter(release => release.draft);
+
 
             if (draftReleases.length === 0) {
               console.log('No draft releases found.');
