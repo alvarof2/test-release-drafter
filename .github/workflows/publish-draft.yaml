@@ -28,18 +28,17 @@ jobs:
               repo,
             });
 
-            console.debug(releases);
-
             // Filter for draft releases
             const draftRelease = releases.data.filter(release => release.draft);
-            console.debug(draftRelease);
-            console.debug(draftRelease[0].id);
-            const id = draftRelease[0].id;
 
             if (!draftRelease) {
               core.setFailed(`No draft release found for tag: ${tagName}`);
               return;
             }
+
+            const id = draftRelease[0].id;
+            const body = draftRelease[0].body;
+            let image = "\nDocker image: `ghcr.io/${owner}/${repo}:${tagName}`";
 
             // Publish the draft release
             await github.rest.repos.updateRelease({
@@ -48,7 +47,8 @@ jobs:
               release_id: id,
               draft: false, // Set draft to false to publish it,
               tag_name: tagName,
-              name: `${repo} ${tagName}`
+              name: `${repo} ${tagName}`,
+              body: body + image
             });
 
             console.log(`Draft release for tag ${tagName} has been published.`);
