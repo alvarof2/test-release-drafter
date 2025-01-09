@@ -1,0 +1,45 @@
+name: Publish Existing Draft Release
+
+on:
+  push:
+    tags:
+      - '*' # Trigger on any tag
+
+jobs:
+  publish-draft-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Use the GitHub Script Action to find and publish the draft release
+      - name: Publish Draft Release
+        uses: actions/github-script@v6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const tagName = context.ref.split('/').pop(); // Extract the tag name
+
+            // Fetch releases to find the draft release for the tag
+            const releases = await github.rest.repos.listReleases({
+              owner,
+              repo,
+            });
+
+            const draftRelease = releases.data.find(release => release.draft && release.title === `Draft`);
+
+            if (!draftRelease) {
+              core.setFailed(`No draft release found for tag: ${tagName}`);
+              return;
+            }
+
+            // Publish the draft release
+            await github.rest.repos.updateRelease({
+              owner,
+              repo,
+              release_id: draftRelease.id,
+              draft: false, // Set draft to false to publish it
+              tag: tagName
+            });
+
+            console.log(`Draft release for tag ${tagName} has been published.`);
