@@ -25,9 +25,7 @@ jobs:
               repo,
             });
 
-            releases.forEach(release => {
-              console.log(`- ID: ${release.id}, Tag: ${release.tag_name}, Name: ${release.name}`);
-            });
+            console.debug(releases)
 
             // Filter for draft releases
             const draftReleases = releases.data.filter(release => release.draft);
