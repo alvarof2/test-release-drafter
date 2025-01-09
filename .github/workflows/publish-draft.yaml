@@ -26,7 +26,7 @@ jobs:
               repo,
             });
 
-            const draftRelease = releases.data.find(release => release.draft && release.name === `Draft`);
+            const draftRelease = releases.data.find(release => release.draft);
 
             if (!draftRelease) {
               core.setFailed(`No draft release found for tag: ${tagName}`);
@@ -38,8 +38,9 @@ jobs:
               owner,
               repo,
               release_id: draftRelease.id,
-              draft: false, // Set draft to false to publish it
-              tag: tagName
+              draft: false, // Set draft to false to publish it,
+              tag_name: tagName,
+              name: `${repo} ${tagName}`
             });
 
             console.log(`Draft release for tag ${tagName} has been published.`);
