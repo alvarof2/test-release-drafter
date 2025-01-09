@@ -38,7 +38,7 @@ jobs:
 
             const id = draftRelease[0].id;
             const body = draftRelease[0].body;
-            let image = "\nDocker image: ghcr.io/${owner}/${repo}:${tagName}";
+            let image = `\nDocker image: ghcr.io/${owner}/${repo}:${tagName}`;
 
             // Publish the draft release
             await github.rest.repos.updateRelease({
