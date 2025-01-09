@@ -6,6 +6,9 @@ on:
       - '*' # Trigger on any tag
   workflow_dispatch:
 
+permissions:
+  contents: write # Allow reading repository contents (including releases)
+
 jobs:
   publish-draft-release:
     runs-on: ubuntu-latest
