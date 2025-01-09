@@ -30,7 +30,7 @@ jobs:
             console.log(`${releases}`);
 
             // Filter for draft releases
-            const draftReleases = releases.data.filter(release => release.draft);
+            const draftReleases = releases.find((r) => r.draft);
 
             if (draftReleases.length === 0) {
               console.log('No draft releases found.');
