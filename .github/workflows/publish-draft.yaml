@@ -26,7 +26,7 @@ jobs:
               repo,
             });
 
-            const draftRelease = releases.data.find(release => release.draft && release.title === `Draft`);
+            const draftRelease = releases.data.find(release => release.draft && release.name === `Draft`);
 
             if (!draftRelease) {
               core.setFailed(`No draft release found for tag: ${tagName}`);
