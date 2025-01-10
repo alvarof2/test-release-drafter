@@ -1,3 +1,4 @@
+tag-template: '${{ env.BRANCH_NAME }}-'v$RESOLVED_VERSION''
 categories:
   - title: '🚀 Nginx One'
     label: 'nginx-one'
