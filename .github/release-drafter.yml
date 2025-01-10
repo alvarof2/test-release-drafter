@@ -1,5 +1,6 @@
 #tag-template: '${{ env.BRANCH_NAME }}-v$RESOLVED_VERSION'
 name-template: 'CELO OPTIMISM - v$RESOLVED_VERSION 🌈'
+filter-by-commitish: true
 categories:
   - title: '🚀 Nginx One'
     label: 'nginx-one'
