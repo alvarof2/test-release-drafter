@@ -1,3 +1,17 @@
+categories:
+  - title: '🚀 Nginx One'
+    label: 'nginx-one'
+  - title: '🐛 Nginx Two'
+    labels: 'nginx-two'
+autolabeler:
+  - label: 'nginx-one'
+    files:
+      - 'nginx-one/**/*'
+  - label: 'nginx-two'
+    files:
+      - 'nginx-two/**/*'
+exclude-labels:
+  - 'skip-release-drafter'
 template: |
   ## What’s Changed
 
